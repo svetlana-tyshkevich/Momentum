@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 320px;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    background-size: cover;
+    background-position: center;
+   
+}
+
+.container {
+    height: 100vh;
+    background-image: url('assets/overlay.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 13vh;
+    text-align: center;
+}
+
+#time {
+    font-size: 8rem;
+}
+
+#date {
+    font-size: 2.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 3rem 0;
+}
+
+h2 {
+    margin-bottom: 0.5rem;
+    opacity: 0.6;
+}
+
+#name {
+    display: inline-block;
+    min-width: 10px;
+}
+
+/* #name {
+    display: inline-block;
+
+    background: none;
+    border: none;
+    box-sizing: content-box;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    outline: 0;
+    padding: 0;
+    width: auto;
+}
+
+#name::-webkit-input-placeholder { 
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+
+
+ }
+#name::-moz-placeholder          { color: blue; } 
+#name:-moz-placeholder           { color: blue; } 
+#name:-ms-input-placeholder      { color: blue; } */
+
+@media(max-width: 700px) {
+    #time {font-size: 6rem;}
+}

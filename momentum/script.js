@@ -5,6 +5,8 @@ const name = document.getElementById('name');
 const focus = document.getElementById('focus');
 let prevName = '[Enter name]';
 let prevFocus = '[Enter focus]';
+let imgArr = [];
+let imgIndex = 0;
 
 // Show time
 function showTime() {
@@ -12,8 +14,11 @@ function showTime() {
     let hour = today.getHours();
     let min = today.getMinutes();
     let sec = today.getSeconds();
-    // если минут 00 и секунд 00 -поменяй фон
-
+    
+    //Change background
+    if (min === 0 && sec === 0) {setBackground()};
+    if (hour === 0 && min === 0 && sec === 0) {randomBackground()};
+    
     // Output time
     time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
 
@@ -40,24 +45,51 @@ function addZero(n) {
     return (parseInt(n, 10) < 10 ? '0' : '') + n;
 }
 
-// Set background and greeting
-function setBgGreet() {
+//Image randomizer 
+function randomBackground() {
+    const periods = ['night', 'morning', 'afternoon', 'evening'];
+    const random = (item) => {
+        let arr = [];
+        while (arr.length < 6) {
+            let randomNumber = Math.ceil(Math.random() * 22);
+            if (!arr.includes(randomNumber)) {
+                arr.push (randomNumber);
+                imgArr.push(`assets/${item}/${randomNumber}.jpg`)  
+            }
+        }
+    }
+    periods.forEach(item => random(item));
+}
+
+// Set background 
+function setBackground() {
+    let today = new Date();
+    let hour = today.getHours();
+    imgIndex = hour;
+    document.body.style.backgroundImage = `url(${imgArr[imgIndex]})`;
+}
+
+// Change Background
+function changeBackground() {
+    if (imgIndex === 23) {imgIndex = 0}
+    else {imgIndex++;}
+    document.body.style.backgroundImage = `url(${imgArr[imgIndex]})`;
+}
+
+// Set greeting
+function setGreet() {
     let today = new Date();
     
     let hour = today.getHours();
 
     if (hour < 6) {
-        document.body.style.backgroundImage = "url('assets/night/pexels-james-wheeler-1542493.jpg')";
         greeting.textContent = 'Good Night, ';
         // document.body.style.color = "white";
     } else if (hour < 12) {
-        document.body.style.backgroundImage = "url('assets/morning/clock-650753_1920.jpg')";
         greeting.textContent = 'Good Morning, ';
     } else if (hour < 18) {
-        document.body.style.backgroundImage = "url('assets/afternoon/pexels-bo-stevens-1046447.jpg')";
         greeting.textContent = 'Good Afternoon, ';
     } else {
-        document.body.style.backgroundImage = "url('assets/evening/pexels-pixabay-278600.jpg')";
         greeting.textContent = 'Good Evening, ';
         // document.body.style.color = "white";
     }
@@ -138,12 +170,14 @@ name.addEventListener('click', clickName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 focus.addEventListener('click', clickFocus);
-
+refresh.addEventListener('click', changeBackground);
 
 
 //Run
 showTime();
 showDate(); 
-setBgGreet();
+setGreet();
 getName();
 getFocus();
+randomBackground();
+setBackground();

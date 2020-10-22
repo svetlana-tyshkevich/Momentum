@@ -7,6 +7,7 @@ let prevName = '[Enter name]';
 let prevFocus = '[Enter focus]';
 let imgArr = [];
 let imgIndex = 0;
+const adviceNext = document.getElementById('advice-next');
 
 // Show time
 function showTime() {
@@ -163,6 +164,16 @@ function clickFocus (e) {
    localStorage.setItem('focus', prevFocus)
 }
 
+// advice API
+const advice = document.querySelector('.advice');
+async function getAdvice() {  
+  const url = `https://api.adviceslip.com/advice`;
+  const res = await fetch(url);
+  const data = await res.json(); 
+  advice.textContent = data.slip.advice;
+  console.log(advice.textContent);
+}
+
 
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
@@ -171,6 +182,9 @@ focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 focus.addEventListener('click', clickFocus);
 refresh.addEventListener('click', changeBackground);
+document.addEventListener('DOMContentLoaded', getAdvice);
+adviceNext.addEventListener('click', getAdvice);
+
 
 
 //Run

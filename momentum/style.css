@@ -32,50 +32,76 @@ body {
 }
 
 #date {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 h1 {
     font-size: 2rem;
-    margin: 3rem 0;
+    margin: 2.5rem 0;
+    display: flex;
+    justify-content: center;
 }
 
 h2 {
     margin-bottom: 0.5rem;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 #name {
     display: inline-block;
     min-width: 10px;
+    margin-left: 0.5rem;
 }
 
-#refresh {
-    background: url('assets/refresh.svg');
+.button {
     background-size: contain;
     background-repeat: no-repeat;
-    position: absolute;
-    right: 50px;
-    bottom: 50px;
-    width: 50px;
-    height: 50px;
     border: none;
     opacity: 0.6;
 }
 
-#refresh:hover {
+.refresh-btn {
+    background: url('assets/refresh.svg');
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 45px;
+    height: 45px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.button:hover {
     opacity: 1;
     cursor: pointer;
 }
 
-#refresh:focus,
-#refresh:active {
+.button:focus,
+.button:active {
     outline: none;
 }
 
-#refresh:active {
+.button:active {
     transform: scale(1.02);
-  }
+}
+
+.advice_container{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 2rem;
+}
+
+.advice {
+    
+    font-size: 1.3rem;
+}
+
+.advice-btn {
+    background: url('assets/next.svg');
+    width: 20px;
+    height: 20px;
+}
 
 @media(max-width: 700px) {
     #time {font-size: 6rem;}

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" version="1">
- <rect fill="#db3c30" width="28" height="28" x="-30" y="-30" rx="14" ry="14" transform="matrix(0,-1,-1,0,0,0)"/>
+ <rect fill="#e46259" width="28" height="28" x="-30" y="-30" rx="14" ry="14" transform="matrix(0,-1,-1,0,0,0)"/>
  <g opacity=".2" transform="matrix(1 0 0 1.3846 -530 499.53)">
   <path class="error" d="m545-355h2v9.389h-2zm0 11.556h2v1.4445h-2z"/>
  </g>

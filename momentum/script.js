@@ -252,7 +252,7 @@ async function getWeather() {
         setTimeout(function () {
             userCity.textContent = '[Enter location]';
             userCity.style.backgroundImage = 'none';
-        }, 2000);
+        }, 1200);
     }
 
     

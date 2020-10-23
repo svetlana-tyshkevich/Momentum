@@ -3,11 +3,20 @@ const time = document.getElementById('time');
 const greeting = document.getElementById('greeting');
 const name = document.getElementById('name');
 const focus = document.getElementById('focus');
+const userCity = document.getElementById('user-city');
 let prevName = '[Enter name]';
 let prevFocus = '[Enter focus]';
+let prevUserCity = '[Enter location]';
 let imgArr = [];
 let imgIndex = 0;
+const advice = document.querySelector('.advice');
 const adviceNext = document.getElementById('advice-next');
+const weatherIcon = document.querySelector('.weather-icon');
+const weatherTemp = document.querySelector('.weather-temp');
+const weatherHumidity = document.querySelector('.weather-humidity');
+const weatherWind = document.querySelector('.weather-wind');
+const cityError = document.querySelector('.cityError');
+
 
 // Show time
 function showTime() {
@@ -55,7 +64,7 @@ function randomBackground() {
             let randomNumber = Math.ceil(Math.random() * 22);
             if (!arr.includes(randomNumber)) {
                 arr.push (randomNumber);
-                imgArr.push(`assets/${item}/${randomNumber}.jpg`)  
+                imgArr.push(`assets/img/${item}/${randomNumber}.jpg`)  
             }
         }
     }
@@ -72,9 +81,19 @@ function setBackground() {
 
 // Change Background
 function changeBackground() {
+    
     if (imgIndex === 23) {imgIndex = 0}
     else {imgIndex++;}
-    document.body.style.backgroundImage = `url(${imgArr[imgIndex]})`;
+
+    const body = document.querySelector('body');
+  const src = imgArr[imgIndex];
+  const img = document.createElement('img');
+  img.src = src;
+  img.onload = () => {      
+    body.style.backgroundImage = `url(${imgArr[imgIndex]})`;
+  }; 
+  refresh.disabled = true;
+  setTimeout(function() { refresh.disabled = false }, 800);
 }
 
 // Set greeting
@@ -159,19 +178,84 @@ function setFocus(e) {
 
 //Click on focus place
 function clickFocus (e) {
-    prevFocus = e.target.innerHTML;
-   e.target.innerHTML = '';
-   localStorage.setItem('focus', prevFocus)
+    if (e.target.innerHTML !== ''){
+        prevFocus = e.target.innerHTML; 
+     }
+     e.target.innerHTML = '';
+     localStorage.setItem('focus', prevFocus);
+}
+
+// Get userCity
+function getUserCity() {
+    if (localStorage.getItem('userCity') === null) {
+        userCity.textContent = prevUserCity;
+    } else {
+        userCity.textContent = localStorage.getItem('userCity');
+    }
+}
+
+// Set userCity
+function setUserCity(e) {
+    if (e.type === 'keypress') {
+        if(e.code === 'Enter' || e.code === 'NumpadEnter') {
+            localStorage.setItem('userCity', e.target.innerHTML);
+            getWeather();
+            userCity.blur();
+        }
+    } else {
+        if (e.target.innerText === '') {
+            localStorage.setItem('userCity', prevUserCity)
+            e.target.innerText = prevUserCity;
+        } else {
+            localStorage.setItem('userCity', e.target.innerText);
+            getWeather();
+        }
+    }
+}
+
+//Click on userCity place
+function clickUserCity (e) {
+    if (e.target.innerHTML !== ''){
+        prevUserCity = e.target.innerHTML; 
+     }
+     e.target.innerHTML = '';
+     localStorage.setItem('userCity', prevUserCity);
 }
 
 // advice API
-const advice = document.querySelector('.advice');
 async function getAdvice() {  
   const url = `https://api.adviceslip.com/advice`;
   const res = await fetch(url);
   const data = await res.json(); 
   advice.textContent = data.slip.advice;
-  console.log(advice.textContent);
+}
+
+//Get weather options
+async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${userCity.textContent}&lang=en&appid=ddefbbf832e5bd48a3fe34d4a7972fec&units=metric`;
+    const res = await fetch(url);
+    if (res.ok) {
+        const data = await res.json();
+
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        weatherTemp.textContent = `${data.main.temp}°C`;
+        weatherHumidity.textContent = `${data.wind.speed}m/s`;
+        weatherWind.textContent = `${data.main.humidity}%`;
+    } else {
+        userCity.textContent = '';
+        userCity.style.backgroundImage = "url('assets/icons/error.svg')";
+        weatherIcon.className = 'weather-icon owf';
+        weatherTemp.textContent = '';
+        weatherHumidity.textContent = '';
+        weatherWind.textContent = '';
+        setTimeout(function () {
+            userCity.textContent = '[Enter location]';
+            userCity.style.backgroundImage = 'none';
+        }, 2000);
+    }
+
+    
 }
 
 
@@ -181,9 +265,14 @@ name.addEventListener('click', clickName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 focus.addEventListener('click', clickFocus);
+userCity.addEventListener('keypress', setUserCity);
+userCity.addEventListener('blur', setUserCity);
+userCity.addEventListener('click', clickUserCity);
 refresh.addEventListener('click', changeBackground);
 document.addEventListener('DOMContentLoaded', getAdvice);
 adviceNext.addEventListener('click', getAdvice);
+document.addEventListener('DOMContentLoaded', getWeather);
+
 
 
 
@@ -193,5 +282,6 @@ showDate();
 setGreet();
 getName();
 getFocus();
+getUserCity();
 randomBackground();
 setBackground();

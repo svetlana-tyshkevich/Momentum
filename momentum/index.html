@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/owfont-regular.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Momentum</title>
 </head>
 <body>
@@ -14,7 +16,6 @@
         <time id="date"></time>
         <h1>
             <span id="greeting"></span>
-            <!-- <input type="text" placeholder="Enter name" id='name'> -->
             <span id="name" contenteditable="true" spellcheck="false"></span>
         </h1>
     
@@ -24,8 +25,18 @@
         <button id="refresh" class="refresh-btn button"></button>
 
         <div class="advice_container">
-            <span class="advice"></span>
             <button id="advice-next" class="advice-btn button"></button>
+            <span class="advice"></span>
+        </div>
+
+        <div class="weather">
+            <div id="user-city" contenteditable="true"></div>
+            <div class="weather__options">
+                <i class="weather-icon"></i>
+                <div class="weather-temp"></div>
+                <div class="weather-humidity"></div>
+                <span class="weather-wind"></span>
+            </div>
         </div>
         
     

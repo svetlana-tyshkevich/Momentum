@@ -239,11 +239,11 @@ async function getWeather() {
 
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-        weatherTemp.textContent = `${data.main.temp}°C`;
-        weatherHumidity.textContent = `${data.wind.speed}m/s`;
-        weatherWind.textContent = `${data.main.humidity}%`;
+        weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
+        weatherWind.textContent = `${Math.round(data.wind.speed)}m/s`;
+        weatherHumidity.textContent = `${data.main.humidity}%`;
     } else {
-        userCity.textContent = '';
+        userCity.textContent = 'Incorrect city';
         userCity.style.backgroundImage = "url('assets/icons/error.svg')";
         weatherIcon.className = 'weather-icon owf';
         weatherTemp.textContent = '';

@@ -17,7 +17,8 @@
 .owf {
   display: inline-block;
   font: normal normal normal 20px/1 owfont;
-  font-size: inherit;
+  font-size: 3rem;
+  line-height: 0.7;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,7 +27,7 @@
 /* makes the font 33% larger relative to the icon container */
 .owf-lg {
   font-size: 1.33333333em;
-  line-height: 0.75em;
+  line-height: 0.5em;
   vertical-align: -15%;
 }
 .owf-2x {

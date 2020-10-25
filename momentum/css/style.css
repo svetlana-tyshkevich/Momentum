@@ -179,7 +179,9 @@ h2 {
 #focus:hover {
     opacity: 0.4;
     cursor: pointer;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    
+    transition: 0.5s;
 }
 
 #user-city:focus,

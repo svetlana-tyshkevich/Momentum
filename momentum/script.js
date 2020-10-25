@@ -26,7 +26,10 @@ function showTime() {
     let sec = today.getSeconds();
     
     //Change background
-    if (min === 0 && sec === 0) {setBackground()};
+    if (min === 0 && sec === 0) {
+        setBackground();
+        setGreet();
+    };
     if (hour === 0 && min === 0 && sec === 0) {randomBackground()};
     
     // Output time

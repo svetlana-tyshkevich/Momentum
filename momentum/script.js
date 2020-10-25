@@ -107,14 +107,12 @@ function setGreet() {
 
     if (hour < 6) {
         greeting.textContent = 'Good Night, ';
-        // document.body.style.color = "white";
-    } else if (hour < 12) {
+    } else if (hour >= 6 && hour < 12) {
         greeting.textContent = 'Good Morning, ';
-    } else if (hour < 18) {
+    } else if (hour >= 12 && hour < 18) {
         greeting.textContent = 'Good Afternoon, ';
     } else {
         greeting.textContent = 'Good Evening, ';
-        // document.body.style.color = "white";
     }
 }
 

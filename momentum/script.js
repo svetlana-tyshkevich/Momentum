@@ -199,9 +199,16 @@ function getUserCity() {
 function setUserCity(e) {
     if (e.type === 'keypress') {
         if(e.code === 'Enter' || e.code === 'NumpadEnter') {
-            localStorage.setItem('userCity', e.target.innerHTML);
-            getWeather();
-            userCity.blur();
+            if (e.target.innerText === '') {
+                localStorage.setItem('userCity', prevUserCity)
+                e.target.innerText = prevUserCity;
+                userCity.blur();
+            } else {
+                localStorage.setItem('userCity', e.target.innerHTML);
+                getWeather();
+                userCity.blur();
+            }
+            
         }
     } else {
         if (e.target.innerText === '') {

@@ -1,2 +1,7 @@
-# svetlana-tyshkevich-JS2020Q3
-Private repository for @svetlana-tyshkevich
+# Momentum
+
+JS, HTML, CSS
+
+Date, Local Storage, API requests.
+
+Deploy: https://svetlana-tyshkevich.github.io/Momentum/momentum/
